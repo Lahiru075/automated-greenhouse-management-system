@@ -1,1 +1,0 @@
-# automated-greenhouse-management-system
