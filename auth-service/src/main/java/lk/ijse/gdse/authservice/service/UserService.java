@@ -6,7 +6,7 @@ import lk.ijse.gdse.authservice.entity.User;
 import java.util.Map;
 
 public interface UserService {
-    User register(UserDTO userDTO);
+    void register(UserDTO userDTO);
 
     Map<String, String> login(UserDTO userDTO);
 

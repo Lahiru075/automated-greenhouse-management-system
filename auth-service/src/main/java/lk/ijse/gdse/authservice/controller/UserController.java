@@ -3,7 +3,9 @@ package lk.ijse.gdse.authservice.controller;
 import lk.ijse.gdse.authservice.dto.ApiResponse;
 import lk.ijse.gdse.authservice.dto.UserDTO;
 import lk.ijse.gdse.authservice.service.UserService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,23 +14,26 @@ import java.util.Map;
 @RestController
 @RequestMapping({"/auth"})
 @CrossOrigin({"*"})
-@RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
-    private ResponseEntity<ApiResponse> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<ApiResponse> registerUser(@RequestBody UserDTO userDTO) {
+
+        userService.register(userDTO);
+
         return ResponseEntity.ok(
                 new ApiResponse(
                         200,
                         "User registered successfully",
-                        userService.register(userDTO)
+                        userDTO
                 )
         );
     }
 
     @PostMapping("/login")
-    private ResponseEntity<ApiResponse> loginUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<ApiResponse> loginUser(@RequestBody UserDTO userDTO) {
         Map<String, String> tokens = userService.login(userDTO);
         return ResponseEntity.ok(
                 new ApiResponse(200, "Login successful", tokens)
