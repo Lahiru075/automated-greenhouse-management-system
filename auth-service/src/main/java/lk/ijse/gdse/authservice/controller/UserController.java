@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping({"/auth"})
 @CrossOrigin({"*"})
@@ -22,6 +24,25 @@ public class UserController {
                         "User registered successfully",
                         userService.register(userDTO)
                 )
+        );
+    }
+
+    @PostMapping("/login")
+    private ResponseEntity<ApiResponse> loginUser(@RequestBody UserDTO userDTO) {
+        Map<String, String> tokens = userService.login(userDTO);
+        return ResponseEntity.ok(
+                new ApiResponse(200, "Login successful", tokens)
+        );
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponse> refresh(@RequestBody Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+
+        String newAccessToken = userService.refreshAccessToken(refreshToken);
+
+        return ResponseEntity.ok(
+                new ApiResponse(200, "Token refreshed successfully", newAccessToken)
         );
     }
 
