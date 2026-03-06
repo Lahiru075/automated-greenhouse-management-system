@@ -2,12 +2,16 @@ package lk.ijse.gdse.zoneservice.services;
 
 import lk.ijse.gdse.zoneservice.dto.ZoneDTO;
 
+import java.util.List;
+
 public interface ZoneService {
     ZoneDTO saveZone(ZoneDTO zoneDTO);
 
-    ZoneDTO getZoneById(Long id);
+    ZoneDTO getZoneById(String id);
 
-    String updateZone(Long id, ZoneDTO zoneDTO);
+    String updateZone(String id, ZoneDTO zoneDTO);
 
-    boolean deleteZone(Long id);
+    boolean deleteZone(String id);
+
+    List<ZoneDTO> findAll();
 }

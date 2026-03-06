@@ -1,10 +1,7 @@
-package lk.ijse.gdse.zoneservice.dto;
-
-import jakarta.persistence.*;
+package lk.ijse.gdse.sensorservice.dto;
 
 public class ZoneDTO {
     private String id;
-    @Column(unique = true)
     private String name;
     private double minTemp;
     private double maxTemp;

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin({"*"})
 @RequestMapping("/api/zones")
@@ -26,8 +28,14 @@ public class ZoneController {
         );
     }
 
+    @GetMapping
+    public List<ZoneDTO> getAllZones() {
+        return zoneService.findAll();
+    }
+
+
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse> getZone(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> getZone(@PathVariable String id) {
         return ResponseEntity.ok(
                 new ApiResponse(
                         200,
@@ -38,7 +46,7 @@ public class ZoneController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> updateZone(@PathVariable Long id, @RequestBody ZoneDTO zoneDTO) {
+    public ResponseEntity<ApiResponse> updateZone(@PathVariable String id, @RequestBody ZoneDTO zoneDTO) {
         return ResponseEntity.ok(
                 new ApiResponse(
                         200,
@@ -49,7 +57,7 @@ public class ZoneController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteZone(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteZone(@PathVariable String id) {
         zoneService.deleteZone(id);
         return ResponseEntity.ok(
                 new ApiResponse(

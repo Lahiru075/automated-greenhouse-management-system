@@ -8,14 +8,13 @@ import jakarta.persistence.Id;
 @Entity
 public class Zone {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String name;
     private double minTemp;
     private double maxTemp;
     private String deviceId;
 
-    public Zone(Long id, String name, double minTemp, double maxTemp, String deviceId) {
+    public Zone(String id, String name, double minTemp, double maxTemp, String deviceId) {
         this.id = id;
         this.name = name;
         this.minTemp = minTemp;
@@ -26,11 +25,11 @@ public class Zone {
     public Zone() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
