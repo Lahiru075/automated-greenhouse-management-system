@@ -1,5 +1,6 @@
 package lk.ijse.gdse.sensorservice.task;
 
+import lk.ijse.gdse.sensorservice.client.AutomationClient;
 import lk.ijse.gdse.sensorservice.client.ZoneClient;
 import lk.ijse.gdse.sensorservice.controller.SensorController;
 import lk.ijse.gdse.sensorservice.dto.TelemetryData;
@@ -28,6 +29,9 @@ public class TelemetryFetcher {
 
     @Autowired
     private ZoneClient zoneClient;
+
+    @Autowired
+    private AutomationClient automationClient;
 
     @Value("${external.iot.base-url}")
     private String baseUrl;
@@ -63,7 +67,11 @@ public class TelemetryFetcher {
                 if (response.getStatusCode() == HttpStatus.OK) {
                     TelemetryData data = response.getBody();
 
+                    data.setZoneId(zone.getId());
+
                     sensorController.updateReading(zone.getId(), data);
+
+                    automationClient.sendToAutomation(data);
 
                     System.out.println("Zone: " + zone.getName() + " | Temp: " + data.getValue().getTemperature());
 

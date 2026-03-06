@@ -50,11 +50,14 @@ public class ZoneServiceImpl implements ZoneService {
 
             Map<String, Object> response = sensorClient.registerDevice(request);
 
-            System.out.println(response);
-
             if (response != null && response.get("deviceId") != null) {
                 String generatedDeviceId = response.get("deviceId").toString();
                 zoneDTO.setDeviceId(generatedDeviceId);
+
+                if (response.get("userId") != null) {
+                    zoneDTO.setUserId(response.get("userId").toString());
+                }
+
             } else {
                 throw new RuntimeException("Sensor Service did not return a valid Device ID");
             }
