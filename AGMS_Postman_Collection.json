@@ -1,0 +1,502 @@
+{
+  "info": {
+    "_postman_id": "784e0e43-acec-4e06-b44c-fa5e39e6264e",
+    "name": "AGMS_Postman_Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44984128",
+    "_collection_link": "https://go.postman.co/collection/44984128-784e0e43-acec-4e06-b44c-fa5e39e6264e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "delete zone",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI3OTQzNjEsImV4cCI6MTc3MjgzMDM2MX0.JfuL-jJbzWmg6rSN0Jbqu72PBXZy0oNN8RpnMLa2fjA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/zones/ccb4ead1-ddc2-484c-bb73-4e0aaabc3b92",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "zones",
+            "ccb4ead1-ddc2-484c-bb73-4e0aaabc3b92"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all crops",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4OTY0MzYsImV4cCI6MTc3MjkzMjQzNn0.x9CiZ_amEnxMhi3u_Lhmq6geMls3k4RBmrr4_-QMIoI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/crops?userId=e662fb70-55bf-4550-b70e-a8e71fcc0617",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "crops"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "e662fb70-55bf-4550-b70e-a8e71fcc0617"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "process",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4OTY0MzYsImV4cCI6MTc3MjkzMjQzNn0.x9CiZ_amEnxMhi3u_Lhmq6geMls3k4RBmrr4_-QMIoI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"zoneId\": \"d5671a0d-d156-4020-8552-efae0f3aa2d2\",\r\n    \"value\": {\r\n        \"temperature\": 35.5\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/automation/process",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "automation",
+            "process"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"lakshan\",\r\n    \"password\": \"lakshan1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"lahiru\",\r\n    \"password\": \"lahiru1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RefreshToken",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWtzaGFuIiwiaWF0IjoxNzcyNzMzNjg3LCJleHAiOjE3NzMzMzg0ODd9._YQM5dvRpLZJsOdpIg8Lc1O6RMm7rvLgv6PP3bk-yc4\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/refresh",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "refresh"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "logs",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4ODQzMjAsImV4cCI6MTc3MjkyMDMyMH0.6aWuYGGp51f7gyeXQyzW4ld7rWNVWW1onsyUMgKXVEw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "loggedInUser",
+            "value": "e662fb70-55bf-4550-b70e-a8e71fcc0617",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/automation/logs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "automation",
+            "logs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "register crops",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4OTY0MzYsImV4cCI6MTc3MjkzMjQzNn0.x9CiZ_amEnxMhi3u_Lhmq6geMls3k4RBmrr4_-QMIoI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cropName\": \"Tomato Batch B\",\r\n    \"quantity\": 250,\r\n    \"userId\": \"e662fb70-55bf-4550-b70e-a8e71fcc0617\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/crops",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "crops"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update lifecycle",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4OTY0MzYsImV4cCI6MTc3MjkzMjQzNn0.x9CiZ_amEnxMhi3u_Lhmq6geMls3k4RBmrr4_-QMIoI",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/crops/1f95597c-3e58-46ef-8a03-c9f0023d22f2/status?status=HARVESTED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "crops",
+            "1f95597c-3e58-46ef-8a03-c9f0023d22f2",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "HARVESTED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "latest",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4MDc1NTcsImV4cCI6MTc3Mjg0MzU1N30.NQyL7MQDjYFt6_oXU1H1RomG3XaYOBMEJNz2SdY-cN4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/sensors/latest",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sensors",
+            "latest"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add zone",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI4MDc1NTcsImV4cCI6MTc3Mjg0MzU1N30.NQyL7MQDjYFt6_oXU1H1RomG3XaYOBMEJNz2SdY-cN4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Liks Zone\",\r\n    \"minTemp\": 12.5,\r\n    \"maxTemp\": 25.0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/zones",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "zones"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Server",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"sensor_lahiru_1\", \r\n    \"password\": \"123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://104.211.95.241:8080/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "104",
+            "211",
+            "95",
+            "241"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get zone",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI3OTMzOTAsImV4cCI6MTc3MjgyOTM5MH0.rtaKCFlE-6_8UZ5oSoR8iqZHf0FkR-yND-WBtf3aeOg",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/zones/ccb4ead1-ddc2-484c-bb73-4e0aaabc3b92 ",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "zones",
+            "ccb4ead1-ddc2-484c-bb73-4e0aaabc3b92 "
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "edit zone",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsYWhpcnUiLCJpYXQiOjE3NzI3OTQzNjEsImV4cCI6MTc3MjgzMDM2MX0.JfuL-jJbzWmg6rSN0Jbqu72PBXZy0oNN8RpnMLa2fjA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Mal gowa\",\r\n    \"minTemp\": 40.0,\r\n    \"maxTemp\": 50.0,\r\n    \"deviceId\": \"95f17957-77cd-4166-8b21-1b1c9976e34e\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/zones/c8ce8ad0-4804-4d7b-9e1e-52270d9e5791",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "zones",
+            "c8ce8ad0-4804-4d7b-9e1e-52270d9e5791"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
