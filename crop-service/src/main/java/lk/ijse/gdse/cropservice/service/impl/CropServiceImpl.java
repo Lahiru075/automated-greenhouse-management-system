@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,14 +24,14 @@ public class CropServiceImpl implements CropService {
     @Override
     public CropDTO registerCrop(CropDTO cropDTO) {
         if (cropDTO.getCropName() == null || cropDTO.getCropName().isEmpty()) {
-            System.out.println("Crop name is required");
-            return null;
+            throw new IllegalArgumentException("Crop name cannot be null or empty");
         }
 
         if (cropDTO.getQuantity() <= 0) {
-            System.out.println("Quantity must be greater than zero");
-            return null;
+            throw new IllegalArgumentException("Quantity must be greater than zero");
         }
+
+        cropDTO.setPlantedDate(LocalDateTime.now());
 
         Crop cop = modelMapper.map(cropDTO, Crop.class);
         Crop savedCrop = cropRepository.save(cop);
@@ -41,8 +42,7 @@ public class CropServiceImpl implements CropService {
     public CropDTO updateCropStatus(String id, CropStatus status) {
         Crop crop = cropRepository.findById(id).orElse(null);
         if (crop == null) {
-            System.out.println("Crop not found with id: " + id);
-            return null;
+            throw new IllegalArgumentException("Crop with id " + id + " not found");
         }
 
         crop.setStatus(status);
