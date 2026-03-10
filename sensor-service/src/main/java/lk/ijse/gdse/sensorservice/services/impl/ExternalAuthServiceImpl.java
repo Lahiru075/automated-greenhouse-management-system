@@ -25,19 +25,19 @@ public class ExternalAuthServiceImpl implements ExternalAuthService {
     @Value("${external.iot.password}")
     private String password;
 
-    private String cachedToken;
+    private String accessToken;
+    private String refreshToken;
 
     @Override
     public String getAccessToken() {
-        if (cachedToken == null) {
+        if (accessToken == null) {
             login();
         }
-        return cachedToken;
+        return accessToken;
     }
 
     private void login() {
         String loginUrl = baseUrl + "/auth/login";
-
 
         Map<String, String> loginRequest = new HashMap<>();
         loginRequest.put("username", username);
@@ -48,17 +48,18 @@ public class ExternalAuthServiceImpl implements ExternalAuthService {
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(loginRequest, headers);
 
         try {
-
             ResponseEntity<Map> response = restTemplate.postForEntity(loginUrl, entity, Map.class);
 
             if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
                 Map<String, Object> body = response.getBody();
 
-                if (body.containsKey("accessToken")) {
-                    this.cachedToken = (String) body.get("accessToken");
-                    System.out.println("TOKEN RECEIVED: " + this.cachedToken);
+
+                if (body.containsKey("accessToken") && body.containsKey("refreshToken")) {
+                    this.accessToken = (String) body.get("accessToken");
+                    this.refreshToken = (String) body.get("refreshToken");
+                    System.out.println("✅ Login Successful! Access & Refresh tokens saved.");
                 } else {
-                    System.err.println("Token not found in response body!");
+                    System.err.println("Tokens not found in response body!");
                 }
             }
         } catch (Exception e) {
@@ -78,17 +79,39 @@ public class ExternalAuthServiceImpl implements ExternalAuthService {
         HttpEntity<DeviceDTO> entity = new HttpEntity<>(deviceDTO, headers);
 
         try {
-
             ResponseEntity<DeviceDTO> response = restTemplate.postForEntity(url, entity, DeviceDTO.class);
-
             return response.getBody();
         } catch (Exception e) {
+
+            if (e.getMessage().contains("401")) {
+                refreshAccessToken();
+            }
+
             throw new RuntimeException("External Device Registration Failed: " + e.getMessage());
         }
     }
 
     @Override
-    public void clearToken() {
-        this.cachedToken = null;
+    public void refreshAccessToken() {
+        if (this.refreshToken == null) {
+            login();
+            return;
+        }
+
+        String refreshUrl = baseUrl + "/auth/refresh";
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("refreshToken", this.refreshToken);
+
+        try {
+            ResponseEntity<Map> response = restTemplate.postForEntity(refreshUrl, requestBody, Map.class);
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                this.accessToken = (String) response.getBody().get("accessToken");
+                System.out.println("Access Token refreshed successfully using Refresh Token.");
+            }
+        } catch (Exception e) {
+            System.err.println("Refreshing Token Failed, trying full login...");
+            login();
+        }
     }
+
 }

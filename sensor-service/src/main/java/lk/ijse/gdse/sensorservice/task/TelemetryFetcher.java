@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -77,13 +78,11 @@ public class TelemetryFetcher {
                     System.out.println("Zone: " + zone.getName() + " | Temp: " + data.getValue().getTemperature());
 
                 }
+            } catch (HttpClientErrorException.Unauthorized e) {
+                authService.refreshAccessToken();
+                System.out.println("Token expired. Refreshing...");
             } catch (Exception e) {
-
                 System.err.println("Error: " + e.getMessage());
-
-                if (e.getMessage() != null && e.getMessage().contains("401")) {
-                    authService.clearToken();
-                }
             }
         }
     }

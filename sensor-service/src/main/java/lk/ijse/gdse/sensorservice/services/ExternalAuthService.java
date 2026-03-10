@@ -7,5 +7,5 @@ public interface ExternalAuthService {
 
     String getAccessToken();
 
-    void clearToken();
+    void refreshAccessToken();
 }
