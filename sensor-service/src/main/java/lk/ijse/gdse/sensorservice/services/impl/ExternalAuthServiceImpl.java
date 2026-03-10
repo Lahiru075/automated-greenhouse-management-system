@@ -27,6 +27,7 @@ public class ExternalAuthServiceImpl implements ExternalAuthService {
 
     private String cachedToken;
 
+    @Override
     public String getAccessToken() {
         if (cachedToken == null) {
             login();
@@ -84,5 +85,10 @@ public class ExternalAuthServiceImpl implements ExternalAuthService {
         } catch (Exception e) {
             throw new RuntimeException("External Device Registration Failed: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void clearToken() {
+        this.cachedToken = null;
     }
 }

@@ -31,6 +31,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Username already exists");
         }
 
+        if(userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new RuntimeException("Password cannot be empty");
+        }
+
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));

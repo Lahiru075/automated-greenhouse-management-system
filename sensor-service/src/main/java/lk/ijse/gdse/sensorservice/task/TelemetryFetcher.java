@@ -5,6 +5,7 @@ import lk.ijse.gdse.sensorservice.client.ZoneClient;
 import lk.ijse.gdse.sensorservice.controller.SensorController;
 import lk.ijse.gdse.sensorservice.dto.TelemetryData;
 import lk.ijse.gdse.sensorservice.dto.ZoneDTO;
+import lk.ijse.gdse.sensorservice.services.ExternalAuthService;
 import lk.ijse.gdse.sensorservice.services.impl.ExternalAuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,7 @@ import java.util.List;
 public class TelemetryFetcher {
 
     @Autowired
-    private ExternalAuthServiceImpl authService;
+    private ExternalAuthService authService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -77,7 +78,12 @@ public class TelemetryFetcher {
 
                 }
             } catch (Exception e) {
-                System.err.println("Error fetching for device " + deviceId + ": " + e.getMessage());
+
+                System.err.println("Error: " + e.getMessage());
+
+                if (e.getMessage() != null && e.getMessage().contains("401")) {
+                    authService.clearToken();
+                }
             }
         }
     }
