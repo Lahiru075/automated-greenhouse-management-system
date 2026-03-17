@@ -11,7 +11,7 @@
         <module name="serviceregistry" />
         <module name="configserver" />
       </profile>
-      <profile name="Annotation profile for crop-service" enabled="true">
+      <profile name="Annotation profile for sensor-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
